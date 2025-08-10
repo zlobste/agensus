@@ -1,18 +1,37 @@
 # agensus
 
-AI Agent Consensus framework - lightweight consensus library for multi-agent LLM systems - fast, dependency-light, and easy to embed.
+AI Agent Consensus framework - reduces bias and improves accuracy in multi-agent LLM systems by leveraging multiple perspectives to reach reliable consensus.
 
-- Strategies: `overlap` (Jaccard token overlap), `rrf` (reciprocal rank fusion), and `llm_judge` (bring your own judge).
-- API: `Consensus(strategy=...).pick(candidates)` -> `ConsensusResult`.
-- Includes advanced LLM integration example in `examples/llm_agents.py`.
-- Pure Python. No heavy deps.
+**Why Consensus?** Single LLMs can hallucinate, produce biased results, or generate false information. Agensus mitigates these issues by combining outputs from multiple agents using proven consensus algorithms.
+
+- **Strategies**: `overlap` (Jaccard similarity), `rrf` (reciprocal rank fusion), `llm_judge` (meta-evaluation)
+- **API**: `Consensus(strategy=...).pick(candidates)` → `ConsensusResult` 
+- **Production-ready**: Fast, dependency-light, pure Python
+- **Flexible**: CLI + Python API with LLM integration examples
 
 ## Install
 ```bash
 pip install -e .
 ```
 
-## Advanced LLM agents example
+## Quick Start
+```python
+from agensus import Consensus
+
+# Multiple AI responses to the same question
+candidates = [
+    "Deploy using blue-green strategy with load balancer switching",
+    "Use rolling deployment with health checks and automatic rollback", 
+    "Implement canary deployment with gradual traffic shifting"
+]
+
+# Find consensus using overlap similarity
+result = Consensus("overlap").pick(candidates)
+print(f"Best answer: {candidates[result.index]}")
+print(f"Confidence scores: {result.scores}")
+```
+
+## Advanced Multi-Agent Example
 See `examples/llm_agents.py` for full script pulling multiple model outputs and applying overlap and LLM-judge consensus.
 ```python
 from agensus import Consensus
@@ -33,6 +52,9 @@ res_judge = Consensus("llm_judge", judge_fn=judge_fn).pick(answers)
 print("LLM Judge winner index:", res_judge.index)
 print("Rationale:", res_judge.rationale)
 ```
+
+## Research Background
+Based on research showing that multi-agent consensus frameworks significantly reduce bias and improve accuracy in generative AI systems. Single LLMs are prone to hallucinations and biased outputs - agensus provides practical consensus mechanisms to address these reliability challenges.
 
 ## CLI
 ```bash
