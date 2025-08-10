@@ -6,10 +6,10 @@ from typing import Any, Callable, Protocol
 
 
 class StrategyFn(Protocol):
-    def __call__(self, candidates: Sequence[str]) -> dict[str, Any]: ...  # noqa: D401
+    def __call__(self, candidates: Sequence[str], /) -> dict[str, Any]: ...  # noqa: D401
 
 
-@dataclass(slots=True)
+@dataclass
 class ConsensusResult:
     index: int
     scores: list[float] | None = None
@@ -36,8 +36,8 @@ class Consensus:
             if judge_fn is None:
                 raise ValueError("llm_judge requires judge_fn")
 
-            def _wrap(cands: Sequence[str]) -> dict[str, Any]:
-                verdict = strategies.llm_judge(list(cands), judge_fn)
+            def _wrap(candidates: Sequence[str]) -> dict[str, Any]:
+                verdict = strategies.llm_judge(list(candidates), judge_fn)
                 return {
                     "index": verdict["index"],
                     "rationale": verdict.get("rationale", ""),
