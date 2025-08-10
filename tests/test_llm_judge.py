@@ -16,6 +16,8 @@ def test_llm_judge_empty_rationale_defaults() -> None:
     def judge_fn(cands: list[str]) -> dict:
         return {"index": 0}
 
-    result = Consensus("llm_judge", judge_fn=judge_fn).pick(["X", "Y"])  # rationale omitted
+    result = Consensus("llm_judge", judge_fn=judge_fn).pick(
+        ["X", "Y"]
+    )  # rationale omitted
     assert result.index == 0
     assert result.rationale == ""  # explicit empty string propagation

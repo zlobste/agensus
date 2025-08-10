@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import re
-from typing import List, Dict, Any, Callable, Sequence
+from collections.abc import Sequence
+from typing import Any, Callable
 
 TokenSet = set[str]
 
@@ -21,7 +22,7 @@ def _jaccard(a: TokenSet, b: TokenSet) -> float:
     return len(a & b) / union_size
 
 
-def overlap(candidates: Sequence[str]) -> Dict[str, Any]:
+def overlap(candidates: Sequence[str]) -> dict[str, Any]:
     sets = [_tokens(c) for c in candidates]
     n = len(sets)
     scores: list[float] = []
@@ -37,7 +38,7 @@ def overlap(candidates: Sequence[str]) -> Dict[str, Any]:
     return {"index": best, "scores": scores}
 
 
-def rrf(candidates: Sequence[str], k: float = 60.0) -> Dict[str, Any]:
+def rrf(candidates: Sequence[str], k: float = 60.0) -> dict[str, Any]:
     sets = [_tokens(c) for c in candidates]
     n = len(sets)
     sim: list[list[float]] = [[0.0] * n for _ in range(n)]
@@ -49,14 +50,18 @@ def rrf(candidates: Sequence[str], k: float = 60.0) -> Dict[str, Any]:
 
     scores = [0.0] * n
     for i in range(n):
-        order = sorted((j for j in range(n) if j != i), key=lambda j: sim[i][j], reverse=True)
+        order = sorted(
+            (j for j in range(n) if j != i), key=lambda j: sim[i][j], reverse=True
+        )
         for rank, j in enumerate(order, start=1):
             scores[j] += 1.0 / (k + rank)
     best = max(range(n), key=scores.__getitem__) if scores else 0
     return {"index": best, "scores": scores}
 
 
-def llm_judge(candidates: Sequence[str], judge_fn: Callable[[List[str]], Dict[str, Any]]) -> Dict[str, Any]:
+def llm_judge(
+    candidates: Sequence[str], judge_fn: Callable[[list[str]], dict[str, Any]]
+) -> dict[str, Any]:
     verdict = judge_fn(list(candidates)) or {}
     index = int(verdict.get("index", 0)) if candidates else 0
     rationale = verdict.get("rationale", "")
