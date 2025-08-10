@@ -1,7 +1,7 @@
 # API
 
 ```python
-from agent_consensus import Consensus, ConsensusResult
+from agensus import Consensus, ConsensusResult
 
 c = Consensus(strategy="overlap")  # or "rrf" or "llm_judge" with judge_fn=...
 res: ConsensusResult = c.pick(["A", "B", "C"])

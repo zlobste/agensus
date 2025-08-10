@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from agent_consensus import Consensus
+from agensus import Consensus
 
 
 def test_rrf_basic_rank_validity() -> None:

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Sequence, Mapping, Any, TypedDict
 
-from agent_consensus import Consensus
+from agensus import Consensus
 
 class JudgeVerdict(TypedDict, total=False):
     index: int

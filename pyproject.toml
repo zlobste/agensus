@@ -1,14 +1,13 @@
 [project]
-name = "agent-consensus"
+name = "agensus"
 version = "0.1.0"
-description = "Consensus algorithms for multi-agent LLM systems - overlap, RRF, and LLM judge."
+description = "AI Agent Consensus framework - lightweight consensus library for multi-agent LLM systems with overlap, RRF, and LLM judge strategies."
 readme = "README.md"
 requires-python = ">=3.9"
-authors = [{name="You", email="you@example.com"}]
 dependencies = []
 
 [project.scripts]
-agent-consensus = "agent_consensus.__main__:main"
+agensus = "agensus.__main__:main"
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
@@ -16,4 +15,4 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["agent_consensus*"]
+include = ["agensus*"]

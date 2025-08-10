@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from agent_consensus import Consensus
+from agensus import Consensus
 
 if __name__ == "__main__":
     consensus = Consensus("overlap")

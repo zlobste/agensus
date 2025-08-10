@@ -17,7 +17,7 @@ def _read_candidates(path: str | None) -> list[str]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Agent consensus CLI")
+    parser = argparse.ArgumentParser(description="Agensus - AI Agent Consensus framework CLI")
     parser.add_argument("--strategy", "-s", default="overlap", choices=["overlap", "rrf"], help="Consensus strategy")
     parser.add_argument("--file", "-f", help="File with one candidate per line. If omitted, read from stdin.")
     args = parser.parse_args()

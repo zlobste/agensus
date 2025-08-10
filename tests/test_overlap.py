@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from agent_consensus import Consensus
+import pytest
+
+from agensus import Consensus
 
 
 def test_overlap_scores_len() -> None:

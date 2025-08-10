@@ -1,6 +1,6 @@
-# agent-consensus
+# agensus
 
-A small library that helps you pick the best answer from multiple candidates. Useful in multi-agent LLM setups where several agents answer the same question and you want one final choice.
+AI Agent Consensus framework - a small library that helps you pick the best answer from multiple candidates. Useful in multi-agent LLM setups where several agents answer the same question and you want one final choice.
 
 ## What it does
 - Scores and compares candidate answers.

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from agent_consensus import Consensus
+from agensus import Consensus
 
 
 def test_llm_judge_rationale() -> None:
